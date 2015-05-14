@@ -7,16 +7,14 @@ RSpec.describe Restaurant, :type => :model do
     fries = Meal.create(name: "Metal shaving fries")
 
     menu = Menu.create(name: "Totally not made up menu")
-
-    MenuItem.create(menu: menu, meal: steak)
-    MenuItem.create(menu: menu, meal: shake)
-    MenuItem.create(menu: menu, meal: fries)
+    menu.menu_items.create(meal: steak)
+    menu.menu_items.create(meal: shake)
+    menu.menu_items.create(meal: fries)
 
     restaurant = Restaurant.create(name: "Unicorn Steak & Shake")
-    Location.create(
+    restaurant.locations.create(
       address: "Winterfell",
       menu: menu,
-      restaurant: restaurant
     )
 
     expect(restaurant.meals).to match_array([steak, shake, fries])
